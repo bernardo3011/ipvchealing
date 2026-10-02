@@ -138,6 +138,10 @@ section{padding-block:clamp(64px,9vw,112px)}
 .chip{font-size:.74rem;letter-spacing:.06em;padding:.35em .8em;border-radius:999px;background:var(--sand);color:var(--plum);font-weight:400}
 .svc p{color:var(--ink-soft);font-size:.97rem;flex:1}
 .svc .btn{align-self:flex-start;margin-top:6px}
+.unsure{margin-top:20px;display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between;padding:24px 28px;border-radius:var(--r);background:var(--sand)}
+.unsure > div{min-width:0;flex:1 1 320px}
+.unsure h3{font-size:1.35rem}
+.unsure p{color:var(--ink-soft);font-size:.96rem;margin-top:6px}
 .price-note{margin-top:28px;display:flex;align-items:center;gap:12px;color:var(--ink-soft);font-size:.95rem}
 .price-note svg{width:20px;height:20px;color:var(--brass);flex:none}
 @media (max-width:900px){.svc-grid{grid-template-columns:1fr;max-width:560px}}
@@ -198,6 +202,8 @@ dialog form{text-align:center;margin-top:12px}
 .opt .ic svg{width:26px;height:26px}
 .opt b{font:400 1.12rem/1.25 var(--f-display);display:block}
 .opt small{color:var(--ink-soft);font-size:.85rem}
+.opt-call{border-style:dashed}
+.opt-call .ic{background:var(--sand);color:var(--plum)}
 .opt .dur{font-size:.78rem;color:var(--plum);background:var(--sand);padding:.3em .7em;border-radius:999px;white-space:nowrap}
 
 .detail{margin-top:22px;border-top:1px solid var(--line);padding-top:22px;display:grid;gap:18px;animation:fade .4s ease}
@@ -413,6 +419,10 @@ footer .fine{border-top:1px solid var(--line-dark);padding-top:20px;font-size:.8
           </div>
         </article>
       </div>
+      <div class="unsure">
+        <div><h3 data-i18n="svc.unsureT">Not sure which one is right for you?</h3><p data-i18n="svc.unsureD">Ask for a free 15-minute phone call. Isabela will ask a few questions and help you choose the service that fits you best.</p></div>
+        <a class="btn btn-plum" href="#book" data-svc="call" data-i18n="svc.unsureB">Request a free 15-minute call</a>
+      </div>
       <p class="price-note"><svg><use href="#i-chat"/></svg><span data-i18n="svc.price">Pricing is shared personally during your free intro call with Isabela.</span></p>
     </div>
   </section>
@@ -477,6 +487,7 @@ footer .fine{border-top:1px solid var(--line-dark);padding-top:20px;font-size:.8
               <button type="button" class="opt" role="radio" aria-checked="true" data-svc="reiki"><span class="ic"><svg><use href="#i-reiki"/></svg></span><span><b data-i18n="s.reiki.name">Reiki Healing</b><small data-i18n="s.reiki.tag">Relaxation, balance, chakras</small></span><span class="dur" data-i18n="d.1h">1 hour</span></button>
               <button type="button" class="opt" role="radio" aria-checked="false" data-svc="multi"><span class="ic"><svg><use href="#i-multi"/></svg></span><span><b data-i18n="s.multi.name">Multidimensional Healing</b><small data-i18n="s.multi.tag">Release patterns, reconnect with your essence</small></span><span class="dur" data-i18n="d.1h">1 hour</span></button>
               <button type="button" class="opt" role="radio" aria-checked="false" data-svc="astro"><span class="ic"><svg><use href="#i-astro"/></svg></span><span><b data-i18n="s.astro.name">Astrological Reading</b><small data-i18n="s.astro.tag">Your birth chart, explained</small></span><span class="dur" data-i18n="d.2h">2 hours</span></button>
+              <button type="button" class="opt opt-call" role="radio" aria-checked="false" data-svc="call"><span class="ic"><svg><use href="#i-phone"/></svg></span><span><b data-i18n="s.call.name">Not sure yet? Free 15-minute call</b><small data-i18n="s.call.tag">Isabela calls you to help find the right service</small></span><span class="dur" data-i18n="d.15m">15 min · Free</span></button>
             </div>
             <div class="detail" id="detail"></div>
             <div class="actions"><span></span><button type="button" class="btn btn-plum" id="to2" data-i18n="f.next">Continue</button></div>
@@ -492,7 +503,15 @@ footer .fine{border-top:1px solid var(--line-dark);padding-top:20px;font-size:.8
               <div class="field"><label for="f-phone"><span data-i18n="f.phone">Phone / WhatsApp</span> <span class="opt-l" data-i18n="f.optional">(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
               <div class="field"><label for="f-lang" data-i18n="f.lang">Preferred language</label>
                 <select id="f-lang" name="language"><option value="English">English</option><option value="Português">Português</option><option value="Español">Español</option></select></div>
-              <fieldset class="field full"><legend data-i18n="f.format">How would you like to meet?</legend>
+              <fieldset class="field full"><legend data-i18n="f.contact">Best way to reach you</legend>
+                <div class="seg">
+                  <label><input type="radio" name="contact_method" id="cm-email" value="Email" checked><span data-i18n="f.c.email">Email</span></label>
+                  <label><input type="radio" name="contact_method" id="cm-call" value="Phone call"><span data-i18n="f.c.call">Phone call</span></label>
+                  <label><input type="radio" name="contact_method" id="cm-text" value="Text message"><span data-i18n="f.c.text">Text message</span></label>
+                  <label><input type="radio" name="contact_method" id="cm-wa" value="WhatsApp"><span>WhatsApp</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="field full" id="fmtSet"><legend data-i18n="f.format">How would you like to meet?</legend>
                 <div class="seg">
                   <label><input type="radio" name="format" id="fmt-in" value="In person (Miami)" checked><span data-i18n="f.inperson">In person, Miami</span></label>
                   <label><input type="radio" name="format" id="fmt-on" value="Online"><span data-i18n="f.online">Online</span></label>
@@ -576,7 +595,7 @@ footer .fine{border-top:1px solid var(--line-dark);padding-top:20px;font-size:.8
 const CONFIG = {
   email: "ipvchealing@gmail.com",
   // Paste Google Calendar appointment-schedule links here when ready:
-  booking: { reiki: "", multi: "", astro: "" }
+  booking: { reiki: "", multi: "", astro: "", call: "" }
 };
 
 /* ---------- Translations ---------- */
@@ -618,7 +637,9 @@ en:{
  "book.loc":"Miami, Florida · and online","copy":"Copy","copied":"Copied","close":"Close",
  "f.s1t":"Which service are you interested in?","f.s1h":"Select one to see the full details.","f.next":"Continue",
  "f.s2t":"A little about you","f.s2h":"Request for","f.name":"Full name","f.email":"Email","f.phone":"Phone / WhatsApp","f.optional":"(optional)",
- "f.lang":"Preferred language","f.format":"How would you like to meet?","f.inperson":"In person, Miami","f.online":"Online","f.either":"Either works",
+ "f.lang":"Preferred language","f.contact":"Best way to reach you","f.c.email":"Email","f.c.call":"Phone call","f.c.text":"Text message","f.e.phone":"Please add your phone number so Isabela can reach you that way.",
+ "s.call.name":"Not sure yet? Free 15-minute call","s.call.tag":"Isabela calls you to help find the right service","d.15m":"15 min · Free","svc.unsureT":"Not sure which one is right for you?","svc.unsureD":"Ask for a free 15-minute phone call. Isabela will ask a few questions and help you choose the service that fits you best.","svc.unsureB":"Request a free 15-minute call","f.msg.call":"What's on your mind? Anything you'd like to explore","f.e.callphone":"Please add your phone number so Isabela can call you.",
+ "f.format":"How would you like to meet?","f.inperson":"In person, Miami","f.online":"Online","f.either":"Either works",
  "f.r.focus":"What would you like support with?","f.r.o1":"Stress & relaxation","f.r.o2":"Emotional balance","f.r.o3":"Low energy","f.r.o4":"Better rest","f.r.o5":"Just curious to try",
  "f.m.before":"Have you done energy or spiritual healing work before?","f.yes":"Yes","f.first":"No, it's my first time",
  "f.a.date":"Date of birth","f.a.time":"Time of birth","f.a.unk":"I don't know my exact time","f.a.place":"City and country of birth","f.a.placeph":"e.g. São Paulo, Brazil",
@@ -669,7 +690,9 @@ pt:{
  "book.loc":"Miami, Flórida · e online","copy":"Copiar","copied":"Copiado","close":"Fechar",
  "f.s1t":"Qual serviço te interessa?","f.s1h":"Selecione um para ver todos os detalhes.","f.next":"Continuar",
  "f.s2t":"Um pouco sobre você","f.s2h":"Solicitação de","f.name":"Nome completo","f.email":"E-mail","f.phone":"Telefone / WhatsApp","f.optional":"(opcional)",
- "f.lang":"Idioma preferido","f.format":"Como você prefere se encontrar?","f.inperson":"Presencial, Miami","f.online":"Online","f.either":"Tanto faz",
+ "f.lang":"Idioma preferido","f.contact":"Melhor forma de contato","f.c.email":"E-mail","f.c.call":"Ligação","f.c.text":"Mensagem de texto","f.e.phone":"Por favor, coloque seu telefone para a Isabela entrar em contato por ele.",
+ "s.call.name":"Ainda em dúvida? Ligação gratuita de 15 minutos","s.call.tag":"A Isabela liga para ajudar a escolher o serviço ideal","d.15m":"15 min · Grátis","svc.unsureT":"Não sabe qual é o ideal para você?","svc.unsureD":"Peça uma ligação gratuita de 15 minutos. A Isabela vai fazer algumas perguntas e ajudar você a escolher o serviço que mais combina com você.","svc.unsureB":"Pedir ligação gratuita de 15 min","f.msg.call":"O que você está vivendo? Algo que gostaria de explorar","f.e.callphone":"Por favor, coloque seu telefone para a Isabela ligar para você.",
+ "f.format":"Como você prefere se encontrar?","f.inperson":"Presencial, Miami","f.online":"Online","f.either":"Tanto faz",
  "f.r.focus":"Com o que você gostaria de apoio?","f.r.o1":"Estresse e relaxamento","f.r.o2":"Equilíbrio emocional","f.r.o3":"Pouca energia","f.r.o4":"Descansar melhor","f.r.o5":"Só curiosidade",
  "f.m.before":"Você já fez algum trabalho energético ou de cura espiritual?","f.yes":"Sim","f.first":"Não, é a primeira vez",
  "f.a.date":"Data de nascimento","f.a.time":"Hora de nascimento","f.a.unk":"Não sei a hora exata","f.a.place":"Cidade e país de nascimento","f.a.placeph":"ex.: São Paulo, Brasil",
@@ -720,7 +743,9 @@ es:{
  "book.loc":"Miami, Florida · y online","copy":"Copiar","copied":"Copiado","close":"Cerrar",
  "f.s1t":"¿Qué servicio te interesa?","f.s1h":"Selecciona uno para ver todos los detalles.","f.next":"Continuar",
  "f.s2t":"Un poco sobre ti","f.s2h":"Solicitud de","f.name":"Nombre completo","f.email":"Correo electrónico","f.phone":"Teléfono / WhatsApp","f.optional":"(opcional)",
- "f.lang":"Idioma preferido","f.format":"¿Cómo prefieres reunirte?","f.inperson":"Presencial, Miami","f.online":"Online","f.either":"Cualquiera",
+ "f.lang":"Idioma preferido","f.contact":"Mejor forma de contactarte","f.c.email":"Correo","f.c.call":"Llamada","f.c.text":"Mensaje de texto","f.e.phone":"Por favor, agrega tu teléfono para que Isabela pueda contactarte por esa vía.",
+ "s.call.name":"¿Aún no sabes? Llamada gratuita de 15 minutos","s.call.tag":"Isabela te llama para ayudarte a elegir el servicio","d.15m":"15 min · Gratis","svc.unsureT":"¿No sabes cuál es el adecuado para ti?","svc.unsureD":"Pide una llamada gratuita de 15 minutos. Isabela te hará algunas preguntas y te ayudará a elegir el servicio que mejor te encaje.","svc.unsureB":"Pedir llamada gratuita de 15 min","f.msg.call":"¿Qué estás viviendo? Algo que te gustaría explorar","f.e.callphone":"Por favor, agrega tu teléfono para que Isabela pueda llamarte.",
+ "f.format":"¿Cómo prefieres reunirte?","f.inperson":"Presencial, Miami","f.online":"Online","f.either":"Cualquiera",
  "f.r.focus":"¿En qué te gustaría recibir apoyo?","f.r.o1":"Estrés y relajación","f.r.o2":"Equilibrio emocional","f.r.o3":"Poca energía","f.r.o4":"Descansar mejor","f.r.o5":"Solo curiosidad",
  "f.m.before":"¿Has hecho antes algún trabajo energético o de sanación espiritual?","f.yes":"Sí","f.first":"No, es mi primera vez",
  "f.a.date":"Fecha de nacimiento","f.a.time":"Hora de nacimiento","f.a.unk":"No sé la hora exacta","f.a.place":"Ciudad y país de nacimiento","f.a.placeph":"ej.: Bogotá, Colombia",
@@ -738,6 +763,10 @@ es:{
 /* In-depth service details shown in the form */
 const DETAIL = {
 en:{
+ call:{what:"A short, free phone call to get to know each other. Isabela asks a few questions about what you're going through and what you hope to feel, then recommends the service that fits you best.",
+  session:["You share what's going on and what you're looking for","Isabela explains how each service works","Together you choose the best fit, and she answers any questions about pricing"],
+  for:["You're new to energy healing or astrology","You're unsure which service is right for you","You'd like to talk before booking a full session"],
+  prep:"Just add your phone number below. Isabela will call you at a time that works for you."},
  reiki:{what:"Reiki is a Japanese energy healing practice. Isabela trained in the traditional Usui Shiki Ryoho system. Through light touch, or with hands held just above the body, Reiki energy is channeled to support deep relaxation and your natural balance.",
   session:["A short conversation about how you're feeling","You rest fully clothed while Isabela works through the chakras","A few quiet minutes at the end to share what came up"],
   for:["You feel stressed, drained or out of balance","You want deeper rest and calm","You're going through an emotional moment","You're curious about energy work"],
@@ -752,6 +781,10 @@ en:{
   need:"Your date, time and city of birth. The exact time makes the reading more precise. If you don't know it, Isabela can still prepare a reading and will tell you what changes."}
 },
 pt:{
+ call:{what:"Uma ligação curta e gratuita para vocês se conhecerem. A Isabela faz algumas perguntas sobre o que você está vivendo e o que deseja sentir, e recomenda o serviço que mais combina com você.",
+  session:["Você conta o que está acontecendo e o que procura","A Isabela explica como funciona cada serviço","Juntas vocês escolhem o melhor caminho, e ela tira dúvidas sobre valores"],
+  for:["Você está começando com cura energética ou astrologia","Você não sabe qual serviço é o ideal","Você prefere conversar antes de marcar uma sessão completa"],
+  prep:"É só deixar seu telefone abaixo. A Isabela vai ligar no horário que for melhor para você."},
  reiki:{what:"O Reiki é uma prática japonesa de cura energética. A Isabela se formou no sistema tradicional Usui Shiki Ryoho. Com um toque leve, ou com as mãos logo acima do corpo, a energia Reiki é canalizada para promover relaxamento profundo e o seu equilíbrio natural.",
   session:["Uma conversa breve sobre como você está se sentindo","Você descansa vestida(o) enquanto a Isabela trabalha os chakras","Alguns minutos ao final para compartilhar o que surgiu"],
   for:["Você se sente estressada(o), sem energia ou desequilibrada(o)","Você quer descansar e se acalmar","Você está passando por um momento emocional","Você tem curiosidade sobre trabalho energético"],
@@ -766,6 +799,10 @@ pt:{
   need:"Sua data, hora e cidade de nascimento. A hora exata deixa a leitura mais precisa. Se você não souber, a Isabela ainda pode preparar a leitura e explica o que muda."}
 },
 es:{
+ call:{what:"Una llamada corta y gratuita para conocerse. Isabela te hace algunas preguntas sobre lo que estás viviendo y lo que esperas sentir, y te recomienda el servicio que mejor te encaja.",
+  session:["Cuentas qué está pasando y qué buscas","Isabela te explica cómo funciona cada servicio","Juntas eligen la mejor opción, y ella responde tus dudas sobre precios"],
+  for:["Eres nueva(o) en la sanación energética o la astrología","No sabes qué servicio es el adecuado","Prefieres hablar antes de reservar una sesión completa"],
+  prep:"Solo deja tu teléfono abajo. Isabela te llamará en el horario que mejor te funcione."},
  reiki:{what:"El Reiki es una práctica japonesa de sanación energética. Isabela se formó en el sistema tradicional Usui Shiki Ryoho. Con un toque suave, o con las manos justo encima del cuerpo, se canaliza la energía Reiki para favorecer una relajación profunda y tu equilibrio natural.",
   session:["Una breve conversación sobre cómo te sientes","Descansas vestida(o) mientras Isabela trabaja los chakras","Unos minutos al final para compartir lo que surgió"],
   for:["Te sientes estresada(o), sin energía o fuera de equilibrio","Quieres descansar y calmarte","Estás atravesando un momento emocional","Tienes curiosidad por el trabajo energético"],
@@ -813,6 +850,7 @@ function syncService(){
   document.querySelectorAll(".opt").forEach(o => o.setAttribute("aria-checked", String(o.dataset.svc === svc)));
   document.getElementById("svcLabel").textContent = t("s."+svc+".name");
   document.querySelectorAll("[data-only]").forEach(el => el.hidden = el.dataset.only !== svc);
+  document.getElementById("fmtSet").hidden = svc === "call";
   const m = document.getElementById("msgLabel"); m.dataset.i18n = "f.msg."+svc; m.textContent = t("f.msg."+svc);
 }
 function choose(s){ svc = s; syncService(); renderDetail(); }
@@ -824,7 +862,7 @@ document.querySelectorAll(".opt").forEach(o => {
     i = (i + (e.key==="ArrowDown"||e.key==="ArrowRight"?1:-1) + opts.length) % opts.length; opts[i].focus(); choose(opts[i].dataset.svc);
   });
 });
-document.querySelectorAll(".svc [data-svc]").forEach(a => a.addEventListener("click", () => { choose(a.dataset.svc); go(1); }));
+document.querySelectorAll(".svc [data-svc], .unsure [data-svc]").forEach(a => a.addEventListener("click", () => { choose(a.dataset.svc); go(1); }));
 
 /* ---------- Steps ---------- */
 const steps = [...document.querySelectorAll(".step")];
@@ -846,14 +884,16 @@ form.addEventListener("submit", async e => {
   const name = (fd.get("name")||"").trim(), email = (fd.get("email")||"").trim();
   if (!name) { showErr("f.e.name"); document.getElementById("f-name").focus(); return; }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr("f.e.email"); document.getElementById("f-email").focus(); return; }
+  if (svc === "call" && !(fd.get("phone")||"").trim()) { showErr("f.e.callphone"); document.getElementById("f-phone").focus(); return; }
+  if (fd.get("contact_method") !== "Email" && !(fd.get("phone")||"").trim()) { showErr("f.e.phone"); document.getElementById("f-phone").focus(); return; }
   if (svc === "astro" && (!fd.get("birth_date") || !(fd.get("birth_place")||"").trim())) { showErr("f.e.birth"); return; }
 
-  const svcName = T.en["s."+svc+".name"];
+  const svcName = svc === "call" ? "Free 15-minute call" : T.en["s."+svc+".name"];
   const payload = {
-    _subject: `New request: ${svcName} from ${name}`,
+    _subject: `New request: ${svcName} from ${name} (contact by ${fd.get("contact_method")})`,
     _template: "table", _replyto: email,
-    Service: svcName, Name: name, Email: email, Phone: fd.get("phone") || "-",
-    "Preferred language": fd.get("language"), "Meeting format": fd.get("format"),
+    Service: svcName, Name: name, Email: email, Phone: fd.get("phone") || "-", "Preferred contact": fd.get("contact_method"),
+    "Preferred language": fd.get("language"), "Meeting format": svc === "call" ? "Phone call" : fd.get("format"),
     "Site language": lang.toUpperCase()
   };
   if (svc === "reiki") payload["Wants support with"] = fd.getAll("focus").join(", ") || "-";
@@ -867,14 +907,14 @@ form.addEventListener("submit", async e => {
       method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body: JSON.stringify(payload)
     });
     const j = await r.json().catch(() => ({}));
-    if (!r.ok || String(j.success) !== "true") throw new Error("send failed");
+    if (!r.ok || String(j.success) !== "true") throw new Error(j.message || ("HTTP " + r.status));
     const link = CONFIG.booking[svc];
     const local = t("s."+svc+".name");
     document.getElementById("doneTitle").textContent = t("f.doneT").replace("{name}", name.split(" ")[0]);
     document.getElementById("doneText").textContent = t(link ? "f.doneB" : "f.doneD").replace("{svc}", local);
     const bl = document.getElementById("bookLink"); bl.hidden = !link; if (link) bl.href = link;
     go(3);
-  } catch(err) { showErr("f.e.send"); }
+  } catch(err) { console.warn("Form error:", err.message); showErr("f.e.send"); errEl.textContent += " (" + err.message + ")"; }
   finally { sendBtn.disabled = false; sendBtn.textContent = t("f.send"); }
 });
 document.getElementById("again").addEventListener("click", () => { form.reset(); document.getElementById("f-btime").disabled=false; go(1); });
